@@ -18,12 +18,12 @@
         </div>
      </div>
     <div class="row">
-         
-        @if ($memberships_particular_data->memberships_type == '1')
+
+        @if (Auth::user()->role_as == '1')
             @php
                 $data = "Premium User";
             @endphp
-        @elseif($memberships_particular_data->memberships_type == '0')
+        @elseif(Auth::user()->role_as == '0')
             @php
                 $data = "Free User";
             @endphp
@@ -31,25 +31,22 @@
 
         <div class="col-3"></div>
         <div class="col-6 border p-2">
-            <h3 class="text-center">Edit Data</h3>
-            <form action="{{url('/membership/update/'.$memberships_particular_data->memberships_id)}}" method="POST">
+            <form action="{{url('/post/store')}}" method="POST">
                 @csrf
                 <div class="form-group">
-                <label for="Name">Member Name</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{Auth::user()->name}}" placeholder="Enter name">
+                <label for="post_title">Post Title</label>
+                <input type="text" class="form-control" id="post_title" name="post_title" placeholder="Enter Post Title">
                 </div>
                 <div class="form-group">
-                <label for="Email">Member Email</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{Auth::user()->email}}" placeholder="Enter Email">
+                <label for="post_description">Post Description</label>
+                <input type="text" class="form-control" id="post_description" name="post_description" placeholder="Enter Post Description">
                 </div>
                 <div class="form-group">
-                <label for="Type">Member Type</label>
-                    <select name="type" id="type" class="form-control" value="" required>
-                        <option value="{{$memberships_particular_data->memberships_type}}" class="d-none" selected>
+                <label for="type">Post Type</label>
+                    <select name="type" id="type" class="form-control" required>
+                        <option value="{{Auth::user()->role_as}}" class="d-none" selected>
                             {{$data}}
                         </option>
-                        <option value="0">Free User</option>
-                        <option value="1">Premium User</option>
                     </select>
                 </div>
                 

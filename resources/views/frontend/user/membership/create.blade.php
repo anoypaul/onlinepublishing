@@ -31,7 +31,7 @@
                 <input type="email" class="form-control" id="email" name="email" value="{{Auth::user()->email}}" placeholder="Enter Email">
                 </div>
                 <div class="form-group">
-                <label for="Email">Member Type</label>
+                <label for="type">Member Type</label>
                     <select name="type" id="type" class="form-control" required>
                         <option value="" class="d-none" selected>Select Category</option>
                         <option value="0">Free User</option>

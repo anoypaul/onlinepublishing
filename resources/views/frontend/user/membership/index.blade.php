@@ -25,6 +25,7 @@
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Type</th>
+            <th scope="col">Date</th>
          </tr>
          </thead>
          <tbody>
@@ -46,6 +47,7 @@
                      <td>{{$value->memberships_name}}</td>
                      <td>{{$value->memberships_email}}</td>
                      <td>{{$data}}</td>
+                     <td>{{ Carbon::parse($value->created_at)->format('Y-m-d')}}</td>
                   </tr>
                @endforeach
             @else

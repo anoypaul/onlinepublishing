@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\MembershipController;
+use App\Http\Controllers\Frontend\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/membership/edit/{id}', [MembershipController::class, 'edit']);
     Route::post('/membership/update/{id}', [MembershipController::class, 'update']);
     Route::get('/membership/delete/{id}', [MembershipController::class, 'delete']);
+
+    Route::get('/post/create', [PostController::class, 'create']);
+    Route::post('/post/store', [PostController::class, 'store']);
+
 
 });
 

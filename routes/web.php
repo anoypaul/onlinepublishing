@@ -40,8 +40,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/membership/update/{id}', [MembershipController::class, 'update']);
     Route::get('/membership/delete/{id}', [MembershipController::class, 'delete']);
 
+    Route::get('/post/index', [PostController::class, 'index']);
     Route::get('/post/create', [PostController::class, 'create']);
     Route::post('/post/store', [PostController::class, 'store']);
+    Route::get('/post/edit/{id}', [PostController::class, 'edit']);
+    Route::post('/post/update/{id}', [PostController::class, 'update']);
+    Route::get('/post/delete/{id}', [PostController::class, 'delete']);
 
 
 });

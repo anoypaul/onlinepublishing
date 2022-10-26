@@ -22,35 +22,32 @@
          <tr>
             <th scope="col">Action</th>
             <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
+            <th scope="col">Post Title</th>
+            <th scope="col">Description</th>
             <th scope="col">Type</th>
+            <th scope="col">Author</th>
          </tr>
          </thead>
          <tbody>
-            @php
-               // echo '<pre>';
-               // print_r($memberships_data);
-               // exit;
-            @endphp
-            @if (count($memberships_data) > 0)
-               @foreach ($memberships_data as $value)
+            @if (count($data) > 0)
+               @foreach ($data as $value)
                   @php
-                     if ($value->memberships_type == '1') {
+                     if ($value->posts_type == 1) {
                         $data = "Primium User";
-                     }elseif($value->memberships_type == '0'){
+                     }elseif($value->posts_type == 0){
                         $data = "Free User";
                      }
                   @endphp
                   <tr>
                      <th class="w-25">
-                        <a href="{{url('/membership/edit/'.$value->memberships_id)}}" class="btn btn-primary" >Edit</a>
-                        <a href="{{url('/membership/delete/'.$value->memberships_id)}}" class="btn btn-danger">Delete</a>
+                        <a href="{{url('/post/edit/'.$value->posts_id)}}" class="btn btn-primary" >Edit</a>
+                        <a href="{{url('/post/delete/'.$value->posts_id)}}" class="btn btn-danger">Delete</a>
                      </th>
-                     <td>{{$value->memberships_id}}</td>
-                     <td>{{$value->memberships_name}}</td>
-                     <td>{{$value->memberships_email}}</td>
+                     <td>{{$value->posts_id}}</td>
+                     <td>{{$value->posts_title}}</td>
+                     <td>{{$value->posts_description}}</td>
                      <td>{{$data}}</td>
+                     <td>{{$value->posts_author}}</td>
                   </tr>
                @endforeach
             @else

@@ -18,54 +18,35 @@
         </div>
      </div>
     <div class="row">
-        {{-- @php
-            echo '<pre>';
-            print_r($membership_data);
-            exit;
-        @endphp --}}
-        @foreach ($membership_data as $value)
-        
-            @if(Auth::user()->name == $value->memberships_name)
-                @php
-                    $memberships_type = $value->memberships_type;
-                @endphp
-            @endif
-        @endforeach
 
-        @if ($memberships_type == '1')
+        @if (Auth::user()->role_as == '1')
             @php
                 $data = "Premium User";
             @endphp
-        @elseif($memberships_type == '0')
+        @elseif(Auth::user()->role_as == '0')
             @php
                 $data = "Free User";
             @endphp
         @endif
-
         <div class="col-3"></div>
         <div class="col-6 border p-2">
-            <form action="{{url('/post/store')}}" method="POST">
+            <form action="{{url('/post/update/'.$post_data->posts_id)}}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="post_title">Post Title</label>
-                    <input type="text" class="form-control" id="post_title" name="post_title" placeholder="Enter Post Title">
+                <label for="post_title">Post Title</label>
+                <input type="text" class="form-control" id="post_title" name="post_title" value="{{$post_data->posts_title}}" placeholder="Enter Post Title">
                 </div>
                 <div class="form-group">
-                    <label for="post_description">Post Description</label>
-                    <input type="text" class="form-control" id="post_description" name="post_description" placeholder="Enter Post Description">
+                <label for="post_description">Post Description</label>
+                <input type="text" class="form-control" id="post_description" name="post_description" value="{{$post_data->posts_description}}" placeholder="Enter Post Description">
                 </div>
                 <div class="form-group">
-                    <label for="type">Post Type</label>
+                <label for="type">Post Type</label>
                     <select name="type" id="type" class="form-control" required>
-                        <option value="{{$memberships_type}}" class="d-none" selected>
+                        <option value="{{Auth::user()->role_as}}" class="d-none" selected>
                             {{$data}}
-                            {{-- {{$memberships_type}} --}}
                         </option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label for="post_description">Post Author</label>
-                    <input type="text" class="form-control" id="posts_author" name="posts_author" value="{{Auth::user()->name}}" placeholder="Post Author">
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Submit</button>

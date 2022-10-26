@@ -18,10 +18,12 @@ use App\Http\Controllers\Frontend\PostController;
 |
 */
 
-Route::get('/', function () {
-    // return view('welcome');
-    return view('frontend.visitor.index');
-});
+// Route::get('/', function () {
+//     // return view('welcome');
+//     return view('frontend.visitor.index');
+// });
+Route::get('/', [UserController::class, 'read']);
+
 
 Auth::routes();
 

@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Frontend\MembershipModel;
 use App\Models\Frontend\PostModel;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewAuthorPost;
+use Illuminate\Support\Facades\Auth;
 use DateTime;
 
 class PostController extends Controller
@@ -21,9 +25,6 @@ class PostController extends Controller
         return view('frontend.user.post.create', compact('membership_data'));
     }
     public function store(Request $request){
-        // echo '<pre>';
-        // print_r($request->all());
-        // exit;
         if (today() && $request->type == '0') {
             $data = DB::table('posts')->get();
             $type = 1;
@@ -31,7 +32,7 @@ class PostController extends Controller
                 $date = new DateTime($value->created_at);
                 $date_check = $date->format("Y/m/d");
                 if (date_format(today(),"Y/m/d") == $date_check) {
-                    if($value->posts_type == 0 && $value->posts_author == $request->posts_author){ //check 
+                    if($value->posts_type == 0 && $value->posts_author == $request->posts_author){
                         $type = $type + 1;
                     }
                 }
@@ -47,6 +48,10 @@ class PostController extends Controller
                 $post_data->posts_type = $request->type;
                 $post_data->posts_author = $request->posts_author;
                 $post_data->save();
+
+                $user = User::where('role_as', '1')->get();
+                Notification::send($user, new NewAuthorPost($post_data));
+
                 $request->session()->flash('status', 'Data Insert successfully!');
                 return redirect()->back();
             }            
@@ -58,6 +63,10 @@ class PostController extends Controller
             $post_data->posts_type = $request->type;
             $post_data->posts_author = $request->posts_author;
             $post_data->save();
+
+            $user = User::where('role_as', '1')->get();
+            Notification::send($user, new NewAuthorPost($post_data));
+
             $request->session()->flash('status', 'Data Insert successfully!');
             return redirect()->back();
         }

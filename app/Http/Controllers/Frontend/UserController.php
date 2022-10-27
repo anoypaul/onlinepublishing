@@ -10,9 +10,6 @@ class UserController extends Controller
 {
     public function read(){
         $posts_data = DB::table('posts')->orderBy('posts_id', 'desc')->get();
-        // echo '<pre>';
-        // print_r($posts_data);
-        // exit;
         return view('frontend.visitor.index', compact('posts_data'));
     }
     public function index(){

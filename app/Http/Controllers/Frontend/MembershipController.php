@@ -20,19 +20,6 @@ class MembershipController extends Controller
         return view('frontend.user.membership.create');
     }
     public function store(Request $request){
-
-        // $request->validate([
-        //     'name' => 'required|unique:posts',
-        //     'email' => 'required|unique:posts',
-        // ]);
-        
-        // $previous_data = DB::table('memberships')
-        //     ->get();
-        // if ($previous_data[0]->memberships_email == $request->email) {
-        //     $request->session()->flash('status', 'Do not Submit Duplicate Data!');
-        //     return redirect('/membership/create');
-        // }
-
         $memberships = new MembershipModel();
         $memberships->memberships_name = $request->name;
         $memberships->memberships_email = $request->email;

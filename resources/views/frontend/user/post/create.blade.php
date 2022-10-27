@@ -52,7 +52,7 @@
                 </div>
                 <div class="form-group">
                     <label for="post_description">Post Description</label>
-                    <input type="text" class="form-control" id="post_description" name="post_description" placeholder="Enter Post Description">
+                    <textarea type="text" class="form-control" id="post_description" name="post_description" rows="4" placeholder="Enter Post Description"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="type">Post Type</label>

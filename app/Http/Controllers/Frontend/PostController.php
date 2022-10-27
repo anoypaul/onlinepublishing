@@ -25,9 +25,6 @@ class PostController extends Controller
         return view('frontend.user.post.create', compact('membership_data'));
     }
     public function store(Request $request){
-        // echo '<pre>';
-        // print_r($request->all());
-        // exit;
         if (today() && $request->type == '0') {
             $data = DB::table('posts')->get();
             $type = 1;
